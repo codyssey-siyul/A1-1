@@ -38,5 +38,13 @@ def show_menu():
     print("7. 즐겨찾기 목록")
     print("0. 종료")
 
+def show_list():
+    print("\n=== 프롬프트 목록 ===")
 
+    for index, prompt in enumerate(prompts, start=1):
+        favorite_mark = "★" if prompt["favorite"] else ""
+        print(f"{index}. [{prompt['category']}] {prompt['title']} {favorite_mark}")
+
+    print(f"\n총 {len(prompts)}개의 프롬프트")
 show_menu()
+show_list()
