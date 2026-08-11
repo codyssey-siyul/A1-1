@@ -1,0 +1,9 @@
+# Python 임시 파일
+__pycache__/
+*.pyc
+
+# 개인 설정·비밀번호 파일
+.env
+
+# VS Code 개인 설정
+.vscode/
