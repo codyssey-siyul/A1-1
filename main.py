@@ -50,5 +50,38 @@ def show_list():
         print(f"{index}. [{prompt['category']}] {prompt['title']} {favorite_mark}")
 
     print(f"\n총 {len(prompts)}개의 프롬프트")
+
+def show_category():
+    print("\n=== 카테고리별 조회 ===")
+
+    categories = []
+
+    for prompt in prompts:
+        if prompt["category"] not in categories:
+            categories.append(prompt["category"])
+
+    for index, category in enumerate(categories, start=1):
+        print(f"{index}. {category}")
+
+    choice = int(input("조회할 카테고리를 선택하세요: "))
+
+    selected_category = categories[choice - 1]
+
+    print(f"\n=== {selected_category} 카테고리 ===")
+
+    category_prompts = [
+        prompt for prompt in prompts
+        if prompt["category"] == selected_category
+    ]
+
+    if not category_prompts:
+        print("해당 카테고리에 등록된 프롬프트가 없습니다.")
+        return
+
+    for index, prompt in enumerate(category_prompts, start=1):
+        favorite_mark = "★" if prompt["favorite"] else ""
+        print(f"{index}. {prompt['title']} {favorite_mark}")
+
 show_menu()
 show_list()
+show_category()
