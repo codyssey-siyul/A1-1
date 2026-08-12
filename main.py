@@ -102,7 +102,35 @@ def show_search():
         favorite_mark = "★" if prompt["favorite"] else ""
         print(f"{index}. [{prompt['category']}] {prompt['title']} {favorite_mark}")
 
-show_menu()
-show_list()
-show_category()
-show_search()
+while True:
+    show_menu()
+
+    choice = input("메뉴를 선택하세요: ")
+
+    if choice == "1":
+        print("프롬프트 추가 기능은 아직 구현되지 않았습니다.")
+
+    elif choice == "2":
+        show_list()
+
+    elif choice == "3":
+        show_category()
+
+    elif choice == "4":
+        show_search()
+
+    elif choice == "5":
+        print("프롬프트 상세 보기 기능은 아직 구현되지 않았습니다.")
+
+    elif choice == "6":
+        print("즐겨찾기 관리 기능은 아직 구현되지 않았습니다.")
+
+    elif choice == "7":
+        print("즐겨찾기 목록 기능은 아직 구현되지 않았습니다.")
+
+    elif choice == "0":
+        print("프로그램을 종료합니다.")
+        break
+
+    else:
+        print("올바른 메뉴 번호를 입력하세요.")
