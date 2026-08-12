@@ -82,6 +82,27 @@ def show_category():
         favorite_mark = "★" if prompt["favorite"] else ""
         print(f"{index}. {prompt['title']} {favorite_mark}")
 
+def show_search():
+    print("\n=== 프롬프트 검색 ===")
+
+    keyword = input("검색할 키워드를 입력하세요: ")
+
+    search_results = [
+        prompt for prompt in prompts
+        if keyword in prompt["title"] or keyword in prompt["content"]
+    ]
+
+    if not search_results:
+        print("검색 결과가 없습니다.")
+        return
+
+    print(f"\n=== '{keyword}' 검색 결과 ===")
+
+    for index, prompt in enumerate(search_results, start=1):
+        favorite_mark = "★" if prompt["favorite"] else ""
+        print(f"{index}. [{prompt['category']}] {prompt['title']} {favorite_mark}")
+
 show_menu()
 show_list()
 show_category()
+show_search()
