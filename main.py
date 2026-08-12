@@ -193,16 +193,40 @@ def show_favorite_list():
 def show_add():
     print("\n=== 프롬프트 추가 ===")
 
+    print("(뒤로가기: 0)")
     title = input("제목: ")
+
+    if title == "0":
+        print("\n프롬프트 추가를 취소했습니다.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
     while not title.strip():
         print("제목은 비워둘 수 없습니다.")
         title = input("제목: ")
 
+        if title == "0":
+            print("\n프롬프트 추가를 취소했습니다.")
+            input("\n계속하려면 Enter를 누르세요...")
+            return
+
+    print("(뒤로가기: 0)")
     content = input("내용: ")
+
+    if content == "0":
+        print("\n프롬프트 추가를 취소했습니다.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
     while not content.strip():
         print("내용은 비워둘 수 없습니다.")
         content = input("내용: ")
 
+        if content == "0":
+            print("\n프롬프트 추가를 취소했습니다.")
+            input("\n계속하려면 Enter를 누르세요...")
+            return
+        
     categories = [
         "텍스트 생성",
         "이미지 생성",
@@ -216,10 +240,16 @@ def show_add():
     for index, category in enumerate(categories, start=1):
         print(f"{index}. {category}")
     print("7. 직접 입력")
+    print("0. 뒤로가기")
 
     category_choice = input("선택: ")
 
     while True:
+        if category_choice == "0":
+            print("\n프롬프트 추가를 취소했습니다.")
+            input("\n계속하려면 Enter를 누르세요...")
+            return
+
         if category_choice.isdigit():
             category_index = int(category_choice)
 
@@ -229,6 +259,11 @@ def show_add():
 
             if category_index == 7:
                 category = input("카테고리를 입력하세요: ")
+
+                if category == "0":
+                    print("\n프롬프트 추가를 취소했습니다.")
+                    input("\n계속하려면 Enter를 누르세요...")
+                    return
 
                 if category.strip():
                     category = category.strip()
