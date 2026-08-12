@@ -1,3 +1,6 @@
+import os
+import json
+
 prompts = [
     {
         "title": "메일 초안 작성 도우미",
@@ -27,6 +30,13 @@ prompts = [
         "favorite": False
     }
 ]
+
+try:
+    with open("prompts.json", "r", encoding="utf-8") as file:
+        prompts = json.load(file)
+except FileNotFoundError:
+    pass
+
 def show_menu():
     print("\n=== 나만의 프롬프트 관리 ===")
     print("1. 프롬프트 추가")
@@ -36,6 +46,7 @@ def show_menu():
     print("5. 프롬프트 상세 보기")
     print("6. 즐겨찾기 관리")
     print("7. 즐겨찾기 목록")
+    print("8. Markdown 내보내기")
     print("0. 종료")
 
 def show_list():
@@ -190,6 +201,40 @@ def show_favorite_list():
 
     input("\n계속하려면 Enter를 누르세요...")
 
+def export_markdown():
+    print("\n=== Markdown 내보내기 ===")
+
+    os.makedirs("markdown", exist_ok=True)
+
+    categories = []
+
+    for prompt in prompts:
+        if prompt["category"] not in categories:
+            categories.append(prompt["category"])
+
+    for category in categories:
+        filename = f"markdown/{category}.md"
+
+        with open(filename, "w", encoding="utf-8") as file:
+            file.write(f"# {category}\n\n")
+
+            for index, prompt in enumerate(
+                [p for p in prompts if p["category"] == category],
+                start=1
+            ):
+                favorite_mark = "⭐" if prompt["favorite"] else ""
+
+                file.write(f"## {index}. {prompt['title']} {favorite_mark}\n\n")
+                file.write(f"**카테고리:** {prompt['category']}\n\n")
+                file.write("### 내용\n\n")
+                file.write(f"{prompt['content']}\n\n")
+                file.write("---\n\n")
+
+    print("Markdown 파일로 내보냈습니다.")
+    print("markdown 폴더를 확인하세요.")
+
+    input("\n계속하려면 Enter를 누르세요...")
+
 def show_add():
     print("\n=== 프롬프트 추가 ===")
 
@@ -318,7 +363,13 @@ while True:
     elif choice == "7":
         show_favorite_list()
 
+    elif choice == "8":
+        export_markdown()
+
     elif choice == "0":
+        with open("prompts.json", "w", encoding="utf-8") as file:
+            json.dump(prompts, file, ensure_ascii=False, indent=4)
+
         print("프로그램을 종료합니다.")
         break
 
