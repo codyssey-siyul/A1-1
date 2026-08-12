@@ -190,13 +190,80 @@ def show_favorite_list():
 
     input("\n계속하려면 Enter를 누르세요...")
 
+def show_add():
+    print("\n=== 프롬프트 추가 ===")
+
+    title = input("제목: ")
+    while not title.strip():
+        print("제목은 비워둘 수 없습니다.")
+        title = input("제목: ")
+
+    content = input("내용: ")
+    while not content.strip():
+        print("내용은 비워둘 수 없습니다.")
+        content = input("내용: ")
+
+    categories = [
+        "텍스트 생성",
+        "이미지 생성",
+        "영상 생성",
+        "페르소나",
+        "자동화",
+        "기타"
+    ]
+
+    print("\n카테고리를 선택하세요.")
+    for index, category in enumerate(categories, start=1):
+        print(f"{index}. {category}")
+    print("7. 직접 입력")
+
+    category_choice = input("선택: ")
+
+    while True:
+        if category_choice.isdigit():
+            category_index = int(category_choice)
+
+            if 1 <= category_index <= len(categories):
+                category = categories[category_index - 1]
+                break
+
+            if category_index == 7:
+                category = input("카테고리를 입력하세요: ")
+
+                if category.strip():
+                    category = category.strip()
+                    break
+
+                print("카테고리는 비워둘 수 없습니다.")
+
+            else:
+                print("올바른 카테고리 번호를 입력하세요.")
+
+        else:
+            print("올바른 카테고리 번호를 입력하세요.")
+
+        category_choice = input("선택: ")
+
+    prompt = {
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    }
+
+    prompts.append(prompt)
+
+    print("\n프롬프트가 추가되었습니다!")
+
+    input("\n계속하려면 Enter를 누르세요...")
+
 while True:
     show_menu()
 
     choice = input("메뉴를 선택하세요: ")
 
     if choice == "1":
-        print("프롬프트 추가 기능은 아직 구현되지 않았습니다.")
+     show_add()
 
     elif choice == "2":
         show_list()
