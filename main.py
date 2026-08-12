@@ -142,6 +142,54 @@ def show_detail():
 
     input("\n계속하려면 Enter를 누르세요...")
 
+def show_favorite():
+    print("\n=== 즐겨찾기 관리 ===")
+
+    choice = input("프롬프트 번호를 입력하세요: ")
+
+    if not choice.isdigit():
+        print("올바른 프롬프트 번호를 입력하세요.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
+    index = int(choice) - 1
+
+    if index < 0 or index >= len(prompts):
+        print("존재하지 않는 프롬프트 번호입니다.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
+    prompt = prompts[index]
+
+    prompt["favorite"] = not prompt["favorite"]
+
+    if prompt["favorite"]:
+        print(f"'{prompt['title']}' 프롬프트를 즐겨찾기에 추가했습니다.")
+    else:
+        print(f"'{prompt['title']}' 프롬프트를 즐겨찾기에서 해제했습니다.")
+
+    input("\n계속하려면 Enter를 누르세요...")
+
+def show_favorite_list():
+    print("\n=== 즐겨찾기 목록 ===")
+
+    favorite_prompts = [
+        prompt for prompt in prompts
+        if prompt["favorite"]
+    ]
+
+    if not favorite_prompts:
+        print("즐겨찾기된 프롬프트가 없습니다.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
+    for index, prompt in enumerate(favorite_prompts, start=1):
+        print(f"{index}. [{prompt['category']}] {prompt['title']} ★")
+
+    print(f"\n총 {len(favorite_prompts)}개의 즐겨찾기")
+
+    input("\n계속하려면 Enter를 누르세요...")
+
 while True:
     show_menu()
 
@@ -163,10 +211,10 @@ while True:
         show_detail()
 
     elif choice == "6":
-        print("즐겨찾기 관리 기능은 아직 구현되지 않았습니다.")
+        show_favorite()
 
     elif choice == "7":
-        print("즐겨찾기 목록 기능은 아직 구현되지 않았습니다.")
+        show_favorite_list()
 
     elif choice == "0":
         print("프로그램을 종료합니다.")
