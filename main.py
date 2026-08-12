@@ -43,6 +43,7 @@ def show_list():
 
     if not prompts:
         print("등록된 프롬프트가 없습니다.")
+        input("\n계속하려면 Enter를 누르세요...")
         return
     
     for index, prompt in enumerate(prompts, start=1):
@@ -50,6 +51,7 @@ def show_list():
         print(f"{index}. [{prompt['category']}] {prompt['title']} {favorite_mark}")
 
     print(f"\n총 {len(prompts)}개의 프롬프트")
+    input("\n계속하려면 Enter를 누르세요...")
 
 def show_category():
     print("\n=== 카테고리별 조회 ===")
@@ -76,11 +78,14 @@ def show_category():
 
     if not category_prompts:
         print("해당 카테고리에 등록된 프롬프트가 없습니다.")
+        input("\n계속하려면 Enter를 누르세요...")
         return
 
     for index, prompt in enumerate(category_prompts, start=1):
         favorite_mark = "★" if prompt["favorite"] else ""
         print(f"{index}. {prompt['title']} {favorite_mark}")
+
+    input("\n계속하려면 Enter를 누르세요...")
 
 def show_search():
     print("\n=== 프롬프트 검색 ===")
@@ -94,6 +99,7 @@ def show_search():
 
     if not search_results:
         print("검색 결과가 없습니다.")
+        input("\n계속하려면 Enter를 누르세요...")
         return
 
     print(f"\n=== '{keyword}' 검색 결과 ===")
@@ -101,6 +107,8 @@ def show_search():
     for index, prompt in enumerate(search_results, start=1):
         favorite_mark = "★" if prompt["favorite"] else ""
         print(f"{index}. [{prompt['category']}] {prompt['title']} {favorite_mark}")
+
+    input("\n계속하려면 Enter를 누르세요...")
 
 while True:
     show_menu()
