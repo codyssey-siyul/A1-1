@@ -110,6 +110,38 @@ def show_search():
 
     input("\n계속하려면 Enter를 누르세요...")
 
+def show_detail():
+    print("\n=== 프롬프트 상세 보기 ===")
+
+    choice = input("프롬프트 번호를 입력하세요: ")
+
+    if not choice.isdigit():
+        print("올바른 프롬프트 번호를 입력하세요.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
+    index = int(choice) - 1
+
+    if index < 0 or index >= len(prompts):
+        print("존재하지 않는 프롬프트 번호입니다.")
+        input("\n계속하려면 Enter를 누르세요...")
+        return
+
+    prompt = prompts[index]
+
+    favorite_mark = "★" if prompt["favorite"] else "☆"
+
+    print("\n" + "-" * 40)
+    print(f"제목: {prompt['title']}")
+    print(f"카테고리: {prompt['category']}")
+    print(f"즐겨찾기: {favorite_mark}")
+    print("-" * 40)
+    print("내용:")
+    print(prompt["content"])
+    print("-" * 40)
+
+    input("\n계속하려면 Enter를 누르세요...")
+
 while True:
     show_menu()
 
@@ -128,7 +160,7 @@ while True:
         show_search()
 
     elif choice == "5":
-        print("프롬프트 상세 보기 기능은 아직 구현되지 않았습니다.")
+        show_detail()
 
     elif choice == "6":
         print("즐겨찾기 관리 기능은 아직 구현되지 않았습니다.")
