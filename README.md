@@ -64,7 +64,7 @@ python main.py
 
 ```
 
-
+<img src="Images/menu.png" width="800">  
 
 프로그램 실행 후 메뉴 번호를 입력하여 원하는 기능을 선택
 
