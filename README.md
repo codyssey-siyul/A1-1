@@ -159,7 +159,19 @@ python main.py
 \- 내보낸 Markdown 파일은 markdown/ 폴더에 저장되도록 구현  
 
 
-### 8) Git 작업 기록
+### 8) 코드 구조 및 Git  
+
++ ### 코드 구조
+ \- 기능 별로 함수를 분리하여 코드의 가독성과 유지 보수성을 높임  
+| 함수 | 기능 |
+| --- | --- |
+| `show_menu()` | 메인 메뉴 출력 및 기능 선택 |
+| `add_prompt()` | 새로운 프롬프트 추가 |
+| `show_list()` | 전체 프롬프트 목록 출력 |
+| `search_prompt()` | 키워드를 이용한 프롬프트 검색 |
+| `show_favorites()` | 즐겨찾기 프롬프트 목록 출력 |
+
++ ### Git 작업 기록
 
 <img src="Images/log.png" width="800">  
 
@@ -170,7 +182,7 @@ python main.py
 | 브랜치 | 작업 내용 |  
 | :---: | :---: |
 | feature-list | 프롬프트 목록 기능 |
-| feature-cancle-add | 프롬프트 추가 취소 기능 |
+| feature-cancel-add | 프롬프트 추가 취소 기능 |
 | feature-persistence | JSON 저장 및 불러오기 기능 |
 
 + ### 주요 Git 명령어  
